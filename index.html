@@ -1,11 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kartikay Gupta</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kartikay Gupta | Portfolio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      line-height: 1.6;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: #2c3e50;
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    header, section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    header {
+      text-align: center;
+      background-color: #ecf0f1;
+    }
+    header img {
+      width: 160px;
+      border-radius: 50%;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+    .section {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      background-color: #ecf0f1;
+      padding: 1rem;
+    }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 1rem; }
+    a { color: #2980b9; }
+    .project-img {
+      max-width: 100px;
+      display: block;
+      margin-top: 0.5rem;
+    }
+  </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    window.onload = () => showSection('about');
+  </script>
 </head>
 <body>
-  <h1>Welcome to My GitHub Page!</h1>
-  <p>This is Kartikay Gupta’s personal website built with GitHub Pages.</p>
+  <nav>
+    <a href="#" onclick="showSection('about')">About Me</a>
+    <a href="#" onclick="showSection('resume')">Resume</a>
+    <a href="#" onclick="showSection('projects')">Projects</a>
+    <a href="#" onclick="showSection('contact')">Contact</a>
+  </nav>
+
+  <header>
+    <img src="https://avatars.githubusercontent.com/u/67113064?v=4" alt="Kartikay Gupta">
+    <h1>Kartikay Gupta</h1>
+    <p>MS CS | Data Scientist | Backend Engineer</p>
+    <p><a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a> | <a href="https://linkedin.com/in/kartikaygupta11">LinkedIn</a> | <a href="https://github.com/Kartikay77">GitHub</a></p>
+  </header>
+
+  <section id="about" class="section">
+    <h2>Hi! Here's who I am & what I do</h2>
+    <p>I am a dedicated software engineer and data scientist with a Master’s degree from UMass Amherst. I specialize in Python, backend systems, machine learning, and real-world analytics. I’ve worked on impactful projects across health prediction, image classification, and NLP-driven evaluation systems.</p>
+  </section>
+
+  <section id="resume" class="section">
+    <h2>Resume</h2>
+    <p><a href="https://drive.google.com/file/d/14ogjmmP962G9_Icw162oS8K9H6Azmrbk/view?usp=sharing">Download My Resume (PDF)</a></p>
+    <ul>
+      <li><strong>Wayfair (Tech Analyst Intern)</strong> — Improved order accuracy by 20% via C#/React and SQL automation.</li>
+      <li><strong>Leo1 (Full Stack Developer)</strong> — Deployed Django systems to cut processing time and automate ops.</li>
+      <li><strong>Dotsquares (ML Intern)</strong> — Used YOLOv3 for face-mask detection; boosted cohort accuracy with ensembles.</li>
+    </ul>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <ul>
+      <li>
+        <strong><a href="https://github.com/Kartikay77/SnapScore-NLP">SnapScore – Text-to-Image Evaluation</a></strong><br />
+        NLP + LSTM + Stable Diffusion | <em>+10% eval accuracy</em>
+        <img src="/mnt/data/73584722-a696-4527-927c-bb50713bd683.png" class="project-img" />
+      </li>
+      <li>
+        <strong><a href="https://github.com/Kartikay77/Image-malaria-prediction">Malaria Cell Classification</a></strong><br />
+        CNN on microscopy data | <em>96% test accuracy</em>
+        <img src="/mnt/data/08260a36-850e-4771-8728-f67268bfd062.png" class="project-img" />
+      </li>
+      <li>
+        <strong><a href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system">Heart Disease Prediction</a></strong><br />
+        ML with R & Python + Tableau Dashboard
+        <img src="/mnt/data/6b12fb6b-777b-412b-96da-b44233cec4d1.png" class="project-img" />
+      </li>
+      <li>
+        <strong><a href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments">Reinforcement Learning Models</a></strong><br />
+        REINFORCE + SARSA | <em>+20% convergence</em>
+        <img src="/mnt/data/6639103e-6f61-4984-afe9-67175c3fb6ee.png" class="project-img" />
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>📧 <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a></p>
+    <p>📍 Amherst, MA | Open to relocate (CA, NY, NJ)</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Kartikay Gupta | Built with ❤️ using GitHub Pages
+  </footer>
 </body>
 </html>
