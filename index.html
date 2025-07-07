@@ -15,23 +15,57 @@
       background-color: #f5f5f5;
     }
     nav {
-      background-color: #253342;
-      display: flex;
-      justify-content: center;
-      gap: 4rem;
-      padding: 1.2rem 0;
+      background-color: #1e2a36;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0.8rem 1rem;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
       font-weight: bold;
-      transition: color 0.3s;
+      color: #ffffff;
+      letter-spacing: 1px;
     }
-    nav a:hover, nav a.active-tab {
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      padding-bottom: 0.3rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #00aaff;
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active-tab::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    .nav-links a:hover,
+    .nav-links a.active-tab {
       color: #00aaff;
     }
     header {
@@ -98,18 +132,23 @@
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active-tab'));
-      document.querySelector(`nav a[data-tab="${id}"]`).classList.add('active-tab');
+      document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-tab'));
+      document.querySelector(`.nav-links a[data-tab="${id}"]`).classList.add('active-tab');
     }
     window.onload = () => showSection('about');
   </script>
 </head>
 <body>
   <nav>
-    <a href="#" data-tab="about" onclick="showSection('about')">ABOUT ME</a>
-    <a href="#" data-tab="resume" onclick="showSection('resume')">RESUME</a>
-    <a href="#" data-tab="projects" onclick="showSection('projects')">PROJECTS</a>
-    <a href="#" data-tab="contact" onclick="showSection('contact')">CONTACT</a>
+    <div class="nav-container">
+      <div class="nav-logo">Kartikay</div>
+      <div class="nav-links">
+        <a href="#" data-tab="about" onclick="showSection('about')">ABOUT ME</a>
+        <a href="#" data-tab="resume" onclick="showSection('resume')">RESUME</a>
+        <a href="#" data-tab="projects" onclick="showSection('projects')">PROJECTS</a>
+        <a href="#" data-tab="contact" onclick="showSection('contact')">CONTACT</a>
+      </div>
+    </div>
   </nav>
 
   <header>
@@ -169,7 +208,7 @@
   </main>
 
   <footer>
-    &copy; 2025 Kartikay Gupta.
+    &copy; 2025 Kartikay Gupta. Designed with HTML, CSS, and 💙.
   </footer>
 </body>
 </html>
