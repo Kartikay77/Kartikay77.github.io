@@ -1,45 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kartikay Gupta | Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+    }
+    nav {
+      background-color: #1e2a36;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .nav-container {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1000px; margin: auto; padding: 0.8rem 1rem;
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: bold; color: #ffffff; letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex; gap: 2.2rem;
+    }
+    .nav-links a {
+      color: #ffffff; text-decoration: none; font-weight: 600;
+      padding-bottom: 0.3rem; position: relative; transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; width: 100%; transform: scaleX(0);
+      height: 2px; bottom: 0; left: 0; background-color: #00aaff;
+      transform-origin: bottom right; transition: transform 0.3s ease-out;
+    }
+    .nav-links a:hover::after, .nav-links a.active-tab::after {
+      transform: scaleX(1); transform-origin: bottom left;
+    }
+    .nav-links a:hover, .nav-links a.active-tab {
+      color: #00aaff;
+    }
+    header {
+      text-align: center; padding: 3rem 1rem 2rem; background-color: #ffffff;
+    }
+    header img {
+      width: 160px; border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    h1 { margin: 1rem 0 0.2rem; color: #253342; }
+    p.subtitle { color: #666; }
+    main {
+      max-width: 1000px; margin: auto; padding: 2rem 1rem;
+    }
+    section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #253342;
+      font-size: 1.8rem;
+    }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 1.5rem; }
+    a { color: #0077cc; }
 
-<!-- Updated Portfolio HTML -->
-<!-- ... (rest of the head remains unchanged) ... -->
+    .project-img {
+      max-width: 160px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: transform 0.2s ease-in-out;
+      margin-top: 0.5rem;
+    }
+    .project-img:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      background-color: #f1f1f1;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      nav {
+        background-color: #1e1e1e;
+      }
+      .nav-links a {
+        color: #e0e0e0;
+      }
+      .nav-links a:hover,
+      .nav-links a.active-tab {
+        color: #00bfff;
+      }
+      header {
+        background-color: #1c1c1c;
+      }
+      section {
+        background-color: #1c1c1c;
+      }
+      footer {
+        background-color: #1c1c1c;
+        color: #aaa;
+      }
+    }
+  </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-tab'));
+      document.querySelector(`.nav-links a[data-tab="${id}"]`).classList.add('active-tab');
+    }
+    window.onload = () => showSection('about');
+  </script>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">Kartikay</div>
+      <div class="nav-links">
+        <a href="#" data-tab="about" onclick="showSection('about')">ABOUT ME</a>
+        <a href="#" data-tab="resume" onclick="showSection('resume')">RESUME</a>
+        <a href="#" data-tab="projects" onclick="showSection('projects')">PROJECTS</a>
+        <a href="#" data-tab="contact" onclick="showSection('contact')">CONTACT</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <img src="Media/KG.png" alt="Kartikay Gupta" />
+    <h1>Kartikay Gupta</h1>
+    <p class="subtitle">MS CS | Data Scientist | Backend Engineer</p>
+    <p>
+      <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a> |
+      <a href="https://linkedin.com/in/kartikaygupta11">LinkedIn</a> |
+      <a href="https://github.com/Kartikay77">GitHub</a>
+    </p>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>Hi! Here's who I am & what I do</h2>
+      <p>I’m a passionate software engineer and machine learning enthusiast, a graduate of the University of Massachusetts Amherst with a Master’s in Computer Science. My interests lie in backend systems, real-world ML/NLP applications, and robust data pipelines. I’ve built impactful systems for e-commerce, healthcare, and image understanding.</p>
+    </section>
+
+    <section id="resume">
+      <h2>Resume</h2>
+      <p><a href="https://drive.google.com/file/d/1e14oyyj-SHmmr1enIg9VOml19A0u8Sua/view?usp=sharing" target="_blank">📄 View Resume (Google Drive)</a></p>
+      <ul>
+        <li><strong>Wayfair (Technical Analyst Intern)</strong><br/>Developed robust APIs and SQL-based insights to reduce delivery errors by 20% and boost ops efficiency by 30%.</li>
+        <li><strong>Leo1 (Full Stack Developer)</strong><br/>Engineered Django backends, automated audit pipelines, and decrypted financial statements for audit efficiency.</li>
+        <li><strong>Dotsquares (ML Intern)</strong><br/>Used YOLOv3 for face mask detection and built ensemble models for targeted marketing.</li>
+      </ul>
+    </section>
 
     <section id="projects">
       <h2>Projects</h2>
       <ul>
         <li>
-          <strong><a href="https://github.com/Kartikay77/SnapScore-NLP">SnapScore – Text-to-Image Evaluation</a></strong><br />
-          NLP + LSTM + Stable Diffusion | <em>+10% eval accuracy</em><br />
+          <strong><a href="https://github.com/Kartikay77/SnapScore-NLP">SnapScore – Text-to-Image Evaluation</a></strong><br/>
+          NLP + LSTM + Stable Diffusion | <em>+10% eval accuracy</em><br/>
           <p><em>Prompt: "Doctor" → Generated Image → Caption → Evaluation Graph</em></p>
           <img src="Media/Doctor_IG.png" class="project-img" />
           <img src="Media/LSTM_Caption_Doctor.png" class="project-img" />
           <img src="Media/Graphs.png" class="project-img" />
         </li>
-
         <li>
-          <strong><a href="https://github.com/Kartikay77/Image-malaria-prediction">Malaria Cell Classification</a></strong><br />
-          CNN on microscopy data | <em>96% test accuracy</em><br />
+          <strong><a href="https://github.com/Kartikay77/Image-malaria-prediction">Malaria Cell Classification</a></strong><br/>
+          CNN on microscopy data | <em>96% test accuracy</em><br/>
           <p><em>Classification examples: Parasitized vs Uninfected cells</em></p>
           <img src="Media/Malaria_Cell_1.png" class="project-img" />
           <img src="Media/Malaria_Cell_2.png" class="project-img" />
         </li>
-
         <li>
-          <strong><a href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system">Heart Disease Prediction</a></strong>  
-          – <a href="https://heart-predictor-cpikdqpgdxrctuiebvgjzu.streamlit.app" target="_blank">Live App</a><br />
-          ML with R & Python + Tableau Dashboard<br />
-          <img src="Media/Heart_Chart.png" class="project-img" />
+          <strong><a href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system">Heart Disease Prediction</a></strong>
+          – <a href="https://heart-predictor-cpikdqpgdxrctuiebvgjzu.streamlit.app" target="_blank">Live App</a><br/>
+          ML with R & Python + Tableau Dashboard
         </li>
-
         <li>
           <strong><a href="https://github.com/Kartikay77/Diabetes-Prediction-System">Diabetes Prediction System</a></strong>
-          – <a href="https://diabetes-predictor-7nkfu3yuwvfajcqxucytrx.streamlit.app" target="_blank">Live App</a><br />
-          XGBoost + NLP Prompt Parser + Streamlit<br />
-          <img src="Media/Diabetes_UI.png" class="project-img" />
+          – <a href="https://diabetes-predictor-7nkfu3yuwvfajcqxucytrx.streamlit.app" target="_blank">Live App</a><br/>
+          XGBoost + NLP Prompt Parser + Streamlit
         </li>
-
         <li>
-          <strong><a href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments">Reinforcement Learning Models</a></strong><br />
-          REINFORCE + SARSA | <em>+20% convergence</em><br />
-          <img src="Media/Convergence_Graph.png" class="project-img" />
+          <strong><a href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments">Reinforcement Learning Models</a></strong><br/>
+          REINFORCE + SARSA | <em>+20% convergence</em>
         </li>
       </ul>
     </section>
@@ -49,3 +209,10 @@
       <p>📧 Email: <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a></p>
       <p>🌍 Location: Jersey City, NJ | Open to relocate</p>
     </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Kartikay Gupta. Designed with HTML, CSS, and 💙.
+  </footer>
+</body>
+</html>
