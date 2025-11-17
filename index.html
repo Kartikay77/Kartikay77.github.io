@@ -1,353 +1,943 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kartikay Gupta | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kartikay Gupta | Software & ML Engineer</title>
 
-  <meta name="description"
-        content="Portfolio of Kartikay Gupta – Software & ML Engineer specializing in backend systems, ML/NLP, data pipelines, and full-stack applications." />
+  <meta
+    name="description"
+    content="Portfolio of Kartikay Gupta – Software & ML Engineer focusing on backend systems, ML/NLP, and data pipelines, with projects in e-commerce, healthcare, and image understanding."
+  />
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
+    /* ---------- THEME VARIABLES ---------- */
+    :root {
+      --bg: #f7f9fc;
+      --bg-elevated: #ffffff;
+      --bg-header: #ffffff;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --accent: #00c8ff;
+      --accent-soft: rgba(0, 200, 255, 0.12);
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --code-bg: #111827;
     }
 
+    html[data-theme="dark"] {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-header: #020617;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #22d3ee; /* neon-ish */
+      --accent-soft: rgba(34, 211, 238, 0.18);
+      --border-subtle: rgba(148, 163, 184, 0.22);
+      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+      --code-bg: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- NAVBAR ---------- */
     nav {
-      background-color: #1e2a36;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.9),
+        rgba(2, 6, 23, 0.75)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    html[data-theme="light"] nav {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.96),
+        rgba(248, 250, 252, 0.92)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
     }
 
     .nav-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0.7rem 1.25rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      max-width: 1000px;
-      margin: auto;
-      padding: 0.8rem 1rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .nav-logo {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #ffffff;
-      letter-spacing: 1px;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #f9fafb;
+    }
+
+    html[data-theme="light"] .nav-left {
+      color: #0f172a;
+    }
+
+    .nav-accent-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #e0f2fe, var(--accent));
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.9);
     }
 
     .nav-links {
       display: flex;
-      gap: 2.2rem;
+      align-items: center;
+      gap: 1.8rem;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .nav-links a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      padding-bottom: 0.3rem;
       position: relative;
-      transition: color 0.3s ease;
+      color: #e5e7eb;
+      text-decoration: none;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active-tab {
-      color: #00aaff;
+    html[data-theme="light"] .nav-links a {
+      color: #111827;
+    }
+
+    .nav-links a span {
+      opacity: 0.8;
+      transition: opacity 0.25s ease;
     }
 
     .nav-links a::after {
       content: "";
       position: absolute;
-      width: 100%;
-      transform: scaleX(0);
-      height: 2px;
-      bottom: 0;
       left: 0;
-      background-color: #00aaff;
-      transform-origin: bottom right;
-      transition: transform 0.3s ease-out;
+      bottom: -0.2rem;
+      width: 0%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+      box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover span,
+    .nav-links a.active span {
+      opacity: 1;
     }
 
     .nav-links a:hover::after,
-    .nav-links a.active-tab::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
+    .nav-links a.active::after {
+      width: 100%;
     }
 
-    header {
+    /* Theme toggle */
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.25rem 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.12), transparent);
+      color: #e5e7eb;
+    }
+
+    html[data-theme="light"] .theme-toggle {
+      color: #0f172a;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.17), white);
+    }
+
+    .theme-toggle-icon {
+      font-size: 1rem;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      padding: 3rem 1rem 2rem;
-      background-color: #ffffff;
+      gap: 1.25rem;
+      padding-top: 1.5rem;
+      padding-bottom: 2.2rem;
     }
 
-    header img {
-      width: 160px;
-      border-radius: 50%;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    .hero-avatar-wrap {
+      width: 170px;
+      height: 170px;
+      border-radius: 999px;
+      padding: 3px;
+      background: conic-gradient(
+        from 180deg,
+        rgba(34, 211, 238, 0.1),
+        rgba(59, 130, 246, 0.72),
+        rgba(14, 165, 233, 0.2),
+        rgba(34, 211, 238, 0.1)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 28px rgba(34, 211, 238, 0.45);
     }
 
-    h1 {
-      margin: 1rem 0 0.2rem;
-      color: #253342;
+    .hero-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background-size: cover;
+      background-position: center;
+      background-image: url("Media/KG.png");
     }
 
-    p.subtitle { color: #666; }
-
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem 1rem;
+    .hero-name {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
     }
 
+    .hero-title {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+    }
+
+    .hero-title span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .chip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent);
+      font-size: 0.86rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .chip-link:hover {
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
+    .chip-link span {
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 0.3rem;
+    }
+
+    .hero-pill {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background-color: rgba(15, 23, 42, 0.6);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    html[data-theme="light"] .hero-pill {
+      background-color: rgba(191, 219, 254, 0.7);
+      color: #0f172a;
+      border-color: rgba(148, 163, 184, 0.55);
+    }
+
+    .hero-blurb {
+      max-width: 760px;
+      margin-top: 1rem;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- SECTIONS ---------- */
     section {
-      display: none;
-      padding: 1.5rem;
-      border-radius: 8px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-      margin-bottom: 1.5rem;
-      animation: fadeIn 0.3s ease-in-out;
+      margin-top: 2.4rem;
     }
 
-    section.active {
-      display: block;
+    .section-card {
+      background-color: var(--bg-elevated);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 1.6rem 1.6rem 1.8rem;
     }
 
-    h2 {
+    .section-heading {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.03em;
+      color: #e5e7eb;
+    }
+
+    html[data-theme="light"] .section-heading {
+      color: #0f172a;
+    }
+
+    .section-heading span {
+      color: var(--accent);
+    }
+
+    .section-subtext {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+    }
+
+    /* ---------- RESUME SECTION ---------- */
+    .resume-meta {
+      font-size: 0.9rem;
       margin-bottom: 1rem;
-      color: #253342;
-      font-size: 1.8rem;
+      line-height: 1.5;
     }
 
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 1.5rem; }
+    .resume-meta p + p {
+      margin-top: 0.35rem;
+    }
 
-    a { color: #0077cc; }
+    .resume-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--accent-soft);
+      font-size: 0.86rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .resume-link span {
+      font-size: 1rem;
+    }
+
+    .exp-list {
+      list-style: none;
+      margin-top: 0.5rem;
+      font-size: 0.92rem;
+    }
+
+    .exp-list li + li {
+      margin-top: 0.9rem;
+    }
+
+    .exp-role {
+      font-weight: 700;
+    }
+
+    .exp-company {
+      opacity: 0.9;
+    }
+
+    .exp-body {
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ---------- PROJECTS SECTION ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 800px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent)
+        var(--bg-elevated);
+      padding: 1rem 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .project-title a {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .project-tech {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .btn-ghost {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.75);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+    }
+
+    html[data-theme="light"] .btn-ghost {
+      background: rgba(226, 232, 240, 0.8);
+      color: #0f172a;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
 
     .project-img {
-      max-width: 160px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: transform 0.2s ease-in-out;
-      margin-top: 0.5rem;
-      margin-right: 0.3rem;
+      max-width: 120px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
 
-    .project-img:hover {
-      transform: scale(1.1);
+    /* ---------- CONTACT ---------- */
+    .contact-list {
+      font-size: 0.92rem;
+      color: var(--text-muted);
     }
 
+    .contact-list p + p {
+      margin-top: 0.3rem;
+    }
+
+    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
-      padding: 1.5rem;
-      font-size: 0.9rem;
-      color: #555;
-      background-color: #f1f1f1;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-      .nav-container {
-        flex-wrap: wrap;
-        row-gap: 0.6rem;
-      }
-      .nav-links {
-        gap: 1.2rem;
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #121212;
-        color: #e0e0e0;
-      }
-      nav { background-color: #1e1e1e; }
-      .nav-links a { color: #e0e0e0; }
-      .nav-links a:hover,
-      .nav-links a.active-tab { color: #00bfff; }
-      header, section, footer { background-color: #1c1c1c; color: #ddd; }
-      footer { color: #aaa; }
+      font-size: 0.8rem;
+      padding: 1.4rem 1rem 2.2rem;
+      color: var(--text-muted);
     }
   </style>
-
-  <noscript><style>section { display:block!important; }</style></noscript>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-
-      document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-tab'));
-      const activeLink = document.querySelector(`.nav-links a[data-tab="${id}"]`);
-      if (activeLink) activeLink.classList.add('active-tab');
-    }
-
-    window.onload = () => showSection('about');
-  </script>
 </head>
-
 <body>
+  <!-- NAVBAR -->
   <nav>
     <div class="nav-container">
-      <div class="nav-logo">Kartikay</div>
-
-      <div class="nav-links">
-        <a href="#" data-tab="about" onclick="showSection('about')">ABOUT ME</a>
-        <a href="#" data-tab="resume" onclick="showSection('resume')">RESUME</a>
-        <a href="#" data-tab="projects" onclick="showSection('projects')">PROJECTS</a>
-        <a href="#" data-tab="contact" onclick="showSection('contact')">CONTACT</a>
+      <div class="nav-left">
+        <div class="nav-accent-dot"></div>
+        <span>Kartikay</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:1.4rem;">
+        <div class="nav-links">
+          <a href="#about" class="active"><span>ABOUT ME</span></a>
+          <a href="#resume"><span>RESUME</span></a>
+          <a href="#projects"><span>PROJECTS</span></a>
+          <a href="#contact"><span>CONTACT</span></a>
+        </div>
+        <button class="theme-toggle" type="button" id="themeToggle">
+          <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <header>
-    <img src="Media/KG.png" alt="Portrait of Kartikay Gupta" />
-    <h1>Kartikay Gupta</h1>
-    <p class="subtitle">Software & ML Engineer | Backend · Data · ML/NLP</p>
-    <p>
-      <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a> |
-      <a href="https://linkedin.com/in/kartikaygupta11" target="_blank">LinkedIn</a> |
-      <a href="https://github.com/Kartikay77" target="_blank">GitHub</a>
-    </p>
-  </header>
-
-  <main>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <h2>Hi! Here's who I am & what I do</h2>
-      <p>
-        I'm a software engineer and machine learning enthusiast with a Master’s in Computer Science from UMass Amherst.
-        I focus on backend systems, ML/NLP applications, and real-world data pipelines. I’ve built production-grade
-        systems in e-commerce, healthcare, and image understanding using Python, SQL, Django, React, PyTorch, and AWS.
+  <div class="page">
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar" aria-label="Photo of Kartikay Gupta"></div>
+      </div>
+      <div>
+        <h1 class="hero-name">Kartikay Gupta</h1>
+        <p class="hero-title">
+          Software &amp; ML Engineer · Backend · Data · <span>ML/NLP</span>
+        </p>
+        <div class="hero-links">
+          <a class="chip-link" href="mailto:erkg1111@gmail.com">
+            <span>✉</span> erkg1111@gmail.com
+          </a>
+          <a
+            class="chip-link"
+            href="https://linkedin.com/in/kartikaygupta11"
+            target="_blank"
+          >
+            <span>in</span> LinkedIn
+          </a>
+          <a
+            class="chip-link"
+            href="https://github.com/Kartikay77"
+            target="_blank"
+          >
+            <span>★</span> GitHub
+          </a>
+        </div>
+        <div class="hero-pill-row">
+          <div class="hero-pill">MS CS @ UMass Amherst</div>
+          <div class="hero-pill">Backend &amp; APIs</div>
+          <div class="hero-pill">ML / NLP</div>
+          <div class="hero-pill">Data Pipelines</div>
+        </div>
+      </div>
+      <p class="hero-blurb">
+        I'm a software engineer and machine learning enthusiast with a Master’s
+        in Computer Science from UMass Amherst. I focus on backend systems,
+        ML/NLP applications, and real-world data pipelines. I’ve built
+        production-grade systems in e-commerce, healthcare, and image
+        understanding using Python, SQL, Django, React, PyTorch, and AWS.
       </p>
+    </header>
+
+    <!-- ABOUT (anchor only, content already in hero) -->
+    <section id="about">
+      <div class="section-card">
+        <div class="section-heading">About <span>Me</span></div>
+        <p class="section-subtext">
+          Quick snapshot of where I’ve been focusing my time recently.
+        </p>
+        <p style="font-size:0.94rem;color:var(--text-muted);line-height:1.6;">
+          • Designing and shipping backend APIs and data workflows that support
+          real-world operations.<br />
+          • Applying ML &amp; NLP to practical problems like medical risk
+          prediction, text-to-image evaluation, and customer analytics.<br />
+          • Building full-stack prototypes with Streamlit, Shiny, and Django to
+          turn ideas into usable tools quickly.<br />
+          • Continuously learning and experimenting with reinforcement learning,
+          deep learning, and scalable data systems.
+        </p>
+      </div>
     </section>
 
     <!-- RESUME -->
     <section id="resume">
-      <h2>Resume</h2>
-      <p><a href="https://drive.google.com/file/d/1e14oyyj-SHmmr1enIg9VOml19A0u8Sua/view?usp=sharing" target="_blank">📄 View Resume (Google Drive)</a></p>
+      <div class="section-card">
+        <div class="section-heading">Resume <span>Snapshot</span></div>
+        <p class="section-subtext">
+          A quick summary of my background. Full details available in the PDF.
+        </p>
 
-      <p><strong>Education:</strong> MS Computer Science, University of Massachusetts Amherst</p>
-      <p><strong>Skills:</strong> Python, SQL, PyTorch, scikit-learn, Django, React, Streamlit, R, Shiny, REST APIs, Git, Docker, AWS</p>
+        <a
+          href="https://drive.google.com/file/d/1e14oyyj-SHmmr1enIg9VOml19A0u8Sua/view?usp=sharing"
+          target="_blank"
+          class="resume-link"
+        >
+          <span>📄</span> View full resume on Google Drive
+        </a>
 
-      <ul>
-        <li>
-          <strong>Wayfair (Technical Analyst Intern)</strong><br/>
-          Developed robust APIs and SQL-based insights that reduced delivery errors by 20% and improved ops efficiency by 30%.
-        </li>
-        <li>
-          <strong>Leo1 (Full Stack Developer)</strong><br/>
-          Built Django backends, automated audit pipelines, and decrypted financial statements for audit optimization.
-        </li>
-        <li>
-          <strong>Dotsquares (ML Intern)</strong><br/>
-          Used YOLOv3 for mask detection and built ensemble ML models for targeted marketing.
-        </li>
-      </ul>
+        <div class="resume-meta">
+          <p>
+            <strong>Education:</strong> MS Computer Science, University of
+            Massachusetts Amherst.
+          </p>
+          <p>
+            <strong>Skills:</strong> Python, SQL, PyTorch, scikit-learn,
+            Django, React, Streamlit, R, Shiny, REST APIs, Git, Docker, AWS.
+          </p>
+        </div>
+
+        <ul class="exp-list">
+          <li>
+            <div class="exp-role">Wayfair – Technical Analyst Intern</div>
+            <div class="exp-body">
+              Developed robust APIs and SQL-based insights that reduced delivery
+              errors by 20% and improved ops efficiency by 30%.
+            </div>
+          </li>
+          <li>
+            <div class="exp-role">Leo1 – Full Stack Developer</div>
+            <div class="exp-body">
+              Built Django backends, automated audit pipelines, and decrypted
+              financial statements for audit optimization.
+            </div>
+          </li>
+          <li>
+            <div class="exp-role">Dotsquares – ML Intern</div>
+            <div class="exp-body">
+              Used YOLOv3 for face-mask detection and built ensemble models for
+              targeted marketing.
+            </div>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects">
-      <h2>Projects</h2>
-      <ul>
+      <div class="section-card">
+        <div class="section-heading">Selected <span>Projects</span></div>
+        <p class="section-subtext">
+          Production-focused ML, backend, and analytics work with live demos.
+        </p>
 
-        <!-- SNAPScore -->
-        <li>
-          <strong><a href="https://github.com/Kartikay77/SnapScore-NLP" target="_blank">
-            SnapScore – Text-to-Image Evaluation
-          </a></strong><br/>
-          Python, PyTorch, LSTM, Stable Diffusion · <em>+10% evaluation accuracy</em><br/>
-
-          <p><em>Prompt → Image → Caption → Evaluation Graph</em></p>
-
-          <img src="Media/Doctor_IG.png" class="project-img" alt="Doctor image" loading="lazy" />
-          <img src="Media/LSTM_Caption_Doctor.png" class="project-img" alt="LSTM caption" loading="lazy" />
-          <img src="Media/Graphs.png" class="project-img" alt="Performance graphs" loading="lazy" />
-        </li>
-
-        <!-- MALARIA -->
-        <li>
-          <strong><a href="https://github.com/Kartikay77/Image-malaria-prediction" target="_blank">
-            Malaria Cell Classification
-          </a></strong><br/>
-          CNN model · <em>96% accuracy</em><br/>
-
-          <p><em>Live Demo:</em>
-            <a href="https://image-malaria-prediction-fe64epjzudmvaph7edmjs8.streamlit.app/"
-               target="_blank">Streamlit App</a>
-          </p>
-
-          <img src="Media/Malaria_Cell_1.png" class="project-img" alt="Parasitized cell" loading="lazy" />
-          <img src="Media/Malaria_Cell_2.png" class="project-img" alt="Uninfected cell" loading="lazy" />
-        </li>
-
-        <!-- HEART DISEASE -->
-        <li>
-          <strong><a href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system"
-                     target="_blank">Heart Disease Prediction</a></strong><br/>
-
-          <p>
-            <em>Live Apps:</em><br/>
-            - <a href="https://kw15u2-kartikay-gupta.shinyapps.io/heart_mian_csv/" target="_blank">
-                Shiny App
-              </a><br/>
-            - <a href="https://heart-predictor-cpikdqpgdxrctuiebvgjzu.streamlit.app/" target="_blank">
-                Streamlit App
+        <div class="projects-grid">
+          <!-- SnapScore -->
+          <article class="project-card">
+            <div class="project-tech">NLP · TEXT-TO-IMAGE EVAL</div>
+            <div class="project-title">
+              <a href="https://github.com/Kartikay77/SnapScore-NLP" target="_blank">
+                SnapScore – Text-to-Image Evaluation
               </a>
-          </p>
+            </div>
+            <p class="project-desc">
+              Python + PyTorch + LSTM + Stable Diffusion to evaluate
+              text-to-image models, improving evaluation accuracy by
+              <strong>10%</strong> over baseline using generated captions and
+              similarity metrics.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/SnapScore-NLP"
+                target="_blank"
+              >
+                <span>🔗</span> GitHub
+              </a>
+            </div>
+            <div class="project-images">
+              <img
+                src="Media/Doctor_IG.png"
+                alt="Generated doctor image"
+                class="project-img"
+                loading="lazy"
+              />
+              <img
+                src="Media/LSTM_Caption_Doctor.png"
+                alt="LSTM caption example"
+                class="project-img"
+                loading="lazy"
+              />
+              <img
+                src="Media/Graphs.png"
+                alt="Evaluation graphs"
+                class="project-img"
+                loading="lazy"
+              />
+            </div>
+          </article>
 
-          ML with R + Python + Tableau Dashboard
-        </li>
+          <!-- Malaria -->
+          <article class="project-card">
+            <div class="project-tech">COMPUTER VISION · HEALTHCARE</div>
+            <div class="project-title">
+              <a
+                href="https://github.com/Kartikay77/Image-malaria-prediction"
+                target="_blank"
+              >
+                Malaria Cell Classification
+              </a>
+            </div>
+            <p class="project-desc">
+              CNN on microscopy images to classify parasitized vs. uninfected
+              cells, achieving <strong>96% test accuracy</strong>. Deployed as a
+              Streamlit web app for interactive inspection.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/Image-malaria-prediction"
+                target="_blank"
+              >
+                <span>🔗</span> GitHub
+              </a>
+              <a
+                class="btn-ghost"
+                href="https://image-malaria-prediction-fe64epjzudmvaph7edmjs8.streamlit.app/"
+                target="_blank"
+              >
+                <span>🚀</span> Live App
+              </a>
+            </div>
+            <div class="project-images">
+              <img
+                src="Media/Malaria_Cell_1.png"
+                alt="Parasitized cell"
+                class="project-img"
+                loading="lazy"
+              />
+              <img
+                src="Media/Malaria_Cell_2.png"
+                alt="Uninfected cell"
+                class="project-img"
+                loading="lazy"
+              />
+            </div>
+          </article>
 
-        <!-- DIABETES -->
-        <li>
-          <strong><a href="https://github.com/Kartikay77/Diabetes-Prediction-System"
-                     target="_blank">Diabetes Prediction System</a></strong><br/>
+          <!-- Heart Disease -->
+          <article class="project-card">
+            <div class="project-tech">TABULAR ML · R &amp; PYTHON</div>
+            <div class="project-title">
+              <a
+                href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system"
+                target="_blank"
+              >
+                Heart Disease Prediction
+              </a>
+            </div>
+            <p class="project-desc">
+              End-to-end risk prediction system combining R, Python, and Tableau
+              dashboards, with both Shiny and Streamlit front-ends for
+              clinicians and analysts.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/Heart-disease-analysis-and-prediction-system"
+                target="_blank"
+              >
+                <span>🔗</span> GitHub
+              </a>
+              <a
+                class="btn-ghost"
+                href="https://kw15u2-kartikay-gupta.shinyapps.io/heart_mian_csv/"
+                target="_blank"
+              >
+                <span>❤️</span> Shiny App
+              </a>
+              <a
+                class="btn-ghost"
+                href="https://heart-predictor-cpikdqpgdxrctuiebvgjzu.streamlit.app/"
+                target="_blank"
+              >
+                <span>🚀</span> Streamlit App
+              </a>
+            </div>
+          </article>
 
-          <p>
-            <em>Live App:</em>
-            <a href="https://diabetes-predictor-7nkfu3yuwvfajcqxucytrx.streamlit.app/"
-               target="_blank">Streamlit App</a>
-          </p>
+          <!-- Diabetes -->
+          <article class="project-card">
+            <div class="project-tech">ML · NLP PROMPT PARSER</div>
+            <div class="project-title">
+              <a
+                href="https://github.com/Kartikay77/Diabetes-Prediction-System"
+                target="_blank"
+              >
+                Diabetes Prediction System
+              </a>
+            </div>
+            <p class="project-desc">
+              XGBoost-based classifier wrapped in a Streamlit interface with a
+              natural-language prompt parser so users can paste free-form text
+              describing health metrics.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/Diabetes-Prediction-System"
+                target="_blank"
+              >
+                <span>🔗</span> GitHub
+              </a>
+              <a
+                class="btn-ghost"
+                href="https://diabetes-predictor-7nkfu3yuwvfajcqxucytrx.streamlit.app/"
+                target="_blank"
+              >
+                <span>🚀</span> Live App
+              </a>
+            </div>
+          </article>
 
-          XGBoost classifier + Natural Language Prompt Parser + Streamlit UI
-        </li>
-
-        <!-- RL -->
-        <li>
-          <strong>
-            <a href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
-               target="_blank">Reinforcement Learning Models</a>
-          </strong><br/>
-          REINFORCE + N-Step SARSA applied to GridWorld, MountainCar, and CartPole<br/>
-          <em>Achieved ~20% better convergence through optimized hyperparameters</em>
-        </li>
-
-      </ul>
+          <!-- RL -->
+          <article class="project-card">
+            <div class="project-tech">REINFORCEMENT LEARNING</div>
+            <div class="project-title">
+              <a
+                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
+                target="_blank"
+              >
+                REINFORCE &amp; N-Step SARSA Experiments
+              </a>
+            </div>
+            <p class="project-desc">
+              Implemented REINFORCE with baseline and semi-gradient N-Step SARSA
+              on GridWorld, MountainCar, and CartPole, achieving about
+              <strong>20% better convergence</strong> via hyperparameter
+              tuning and learning-curve analysis.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
+                target="_blank"
+              >
+                <span>🔗</span> GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact</h2>
-      <p>📧 Email: <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a></p>
-      <p>🌍 Location: Jersey City, NJ | Open to relocate</p>
+      <div class="section-card">
+        <div class="section-heading">Get in <span>Touch</span></div>
+        <p class="section-subtext">
+          Open to Software / ML / Backend roles and interesting data-heavy
+          problems.
+        </p>
+        <div class="contact-list">
+          <p>
+            📧 Email:
+            <a href="mailto:erkg1111@gmail.com">erkg1111@gmail.com</a>
+          </p>
+          <p>📍 Jersey City, NJ · Open to relocate</p>
+          <p>
+            🔗 LinkedIn:
+            <a href="https://linkedin.com/in/kartikaygupta11" target="_blank"
+              >kartikaygupta11</a
+            >
+          </p>
+          <p>
+            💻 GitHub:
+            <a href="https://github.com/Kartikay77" target="_blank"
+              >Kartikay77</a
+            >
+          </p>
+        </div>
+      </div>
     </section>
-
-  </main>
+  </div>
 
   <footer>
-    &copy; 2025 Kartikay Gupta. Designed with HTML, CSS, and 💙.
+    &copy; 2025 Kartikay Gupta. Crafted with HTML, CSS, a bit of JS, and 💙.
   </footer>
 
+  <script>
+    // Theme handling: respect saved preference or system preference
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem("kg-theme");
+    if (!storedTheme) {
+      const prefersDark = window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.setAttribute("data-theme", prefersDark ? "dark" : "light");
+    } else {
+      root.setAttribute("data-theme", storedTheme);
+    }
+
+    const btn = document.getElementById("themeToggle");
+    const icon = document.getElementById("themeIcon");
+    const label = document.getElementById("themeLabel");
+
+    function syncToggleUI() {
+      const mode = root.getAttribute("data-theme");
+      if (mode === "dark") {
+        icon.textContent = "🌙";
+        label.textContent = "Dark";
+      } else {
+        icon.textContent = "☀️";
+        label.textContent = "Light";
+      }
+    }
+    syncToggleUI();
+
+    btn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("kg-theme", next);
+      syncToggleUI();
+    });
+
+    // Highlight active nav link on scroll
+    const sections = ["about", "resume", "projects", "contact"];
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    function onScroll() {
+      const scrollY = window.scrollY;
+      let currentId = "about";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop - 120 <= scrollY) {
+          currentId = id;
+        }
+      }
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href").replace("#", "");
+        link.classList.toggle("active", href === currentId);
+      });
+    }
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+  </script>
 </body>
 </html>
