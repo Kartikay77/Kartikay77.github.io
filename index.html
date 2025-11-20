@@ -173,13 +173,21 @@
       gap: 0.35rem;
       font-size: 0.8rem;
       cursor: pointer;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.12), transparent);
+      background: radial-gradient(
+        circle at 0 0,
+        rgba(56, 189, 248, 0.12),
+        transparent
+      );
       color: #e5e7eb;
     }
 
     html[data-theme="light"] .theme-toggle {
       color: #0f172a;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.17), white);
+      background: radial-gradient(
+        circle at 0 0,
+        rgba(56, 189, 248, 0.17),
+        white
+      );
     }
 
     .theme-toggle-icon {
@@ -205,8 +213,8 @@
     }
 
     .hero-avatar-wrap {
-      width: 170px;
-      height: 170px;
+      width: 190px;
+      height: 190px;
       border-radius: 999px;
       padding: 3px;
       background: conic-gradient(
@@ -220,15 +228,15 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 28px rgba(34, 211, 238, 0.45);
+      overflow: hidden; /* crop cleanly to circle */
     }
 
-    .hero-avatar {
+    .hero-avatar-img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      object-position: 50% 15%; /* adjust vertical framing of your face */
       border-radius: 999px;
-      background-size: cover;
-      background-position: center;
-      background-image: url("Media/KG.png");
     }
 
     .hero-name {
@@ -262,7 +270,11 @@
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
       border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent);
+      background: radial-gradient(
+        circle at 0 0,
+        var(--accent-soft),
+        transparent
+      );
       font-size: 0.86rem;
       color: var(--text);
       text-decoration: none;
@@ -343,6 +355,61 @@
       margin-bottom: 1.1rem;
     }
 
+    /* ---------- ABOUT ---------- */
+    .about-list {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding-left: 1.2rem;
+    }
+
+    .about-list li + li {
+      margin-top: 0.25rem;
+    }
+
+    /* ---------- SKILLS SECTION ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 900px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill-block h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .skill-block p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .skill-tags span {
+      font-size: 0.78rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background-color: rgba(15, 23, 42, 0.65);
+    }
+
+    html[data-theme="light"] .skill-tags span {
+      background-color: rgba(226, 232, 240, 0.9);
+    }
+
     /* ---------- RESUME SECTION ---------- */
     .resume-meta {
       font-size: 0.9rem;
@@ -384,10 +451,6 @@
       font-weight: 700;
     }
 
-    .exp-company {
-      opacity: 0.9;
-    }
-
     .exp-body {
       color: var(--text-muted);
       margin-top: 0.15rem;
@@ -410,12 +473,23 @@
     .project-card {
       border-radius: 16px;
       border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent)
+      background: radial-gradient(
+          circle at 0 0,
+          var(--accent-soft),
+          transparent
+        )
         var(--bg-elevated);
       padding: 1rem 1rem 1.15rem;
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
+      transition: all 0.18s ease-out;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px rgba(34, 211, 238, 0.25);
+      transform: translateY(-2px);
     }
 
     .project-title a {
@@ -508,6 +582,7 @@
       <div style="display:flex;align-items:center;gap:1.4rem;">
         <div class="nav-links">
           <a href="#about" class="active"><span>ABOUT ME</span></a>
+          <a href="#skills"><span>SKILLS</span></a>
           <a href="#resume"><span>RESUME</span></a>
           <a href="#projects"><span>PROJECTS</span></a>
           <a href="#contact"><span>CONTACT</span></a>
@@ -524,7 +599,8 @@
     <!-- HERO -->
     <header class="hero" id="top">
       <div class="hero-avatar-wrap">
-        <div class="hero-avatar" aria-label="Photo of Kartikay Gupta"></div>
+        <!-- Make sure this path exists: Media/KG.png -->
+        <img src="Media/KG.png" alt="Photo of Kartikay Gupta" class="hero-avatar-img" />
       </div>
       <div>
         <h1 class="hero-name">Kartikay Gupta</h1>
@@ -564,23 +640,22 @@
         </div>
       </div>
       <p class="hero-blurb">
-          Software engineer with an MS in Computer Science from UMass Amherst,
-          focusing on backend systems, ML/NLP applications, and real-world data
-          pipelines. I've built production-grade systems in e-commerce,
-          healthcare, and image understanding using Python, SQL, Django, React,
-          PyTorch, and AWS.
+        Software engineer with an MS in Computer Science from UMass Amherst,
+        focused on backend systems, ML/NLP, and data pipelines. I’ve built and
+        deployed systems in e-commerce, healthcare, and image understanding
+        using Python, SQL, Django, React, PyTorch, and AWS.
       </p>
     </header>
 
-    <!-- ABOUT (anchor only, content already in hero) -->
+    <!-- ABOUT -->
     <section id="about">
       <div class="section-card">
         <div class="section-heading">About <span>Me</span></div>
         <p class="section-subtext">
           Quick snapshot of where I’ve been focusing my time recently.
         </p>
-    
-        <ul style="font-size:0.94rem;color:var(--text-muted);line-height:1.6;padding-left:1.2rem;">
+
+        <ul class="about-list">
           <li>Designing and shipping backend APIs and data workflows that support real-world operations.</li>
           <li>Applying ML &amp; NLP to practical problems like medical risk prediction, text-to-image evaluation, and customer analytics.</li>
           <li>Building full-stack prototypes with Streamlit, Shiny, and Django to turn ideas into usable tools quickly.</li>
@@ -589,6 +664,50 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-card">
+        <div class="section-heading">Core <span>Skills</span></div>
+        <p class="section-subtext">
+          I focus on reliable backend systems, practical ML/NLP, and data-heavy applications.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h3>Backend &amp; APIs</h3>
+            <p>
+              Design and ship RESTful services, background jobs, and data workflows that support real users and operations.
+            </p>
+            <div class="skill-tags">
+              <span>Python</span><span>Django</span><span>Flask</span>
+              <span>REST APIs</span><span>SQL</span><span>PostgreSQL</span>
+            </div>
+          </div>
+
+          <div class="skill-block">
+            <h3>ML / NLP</h3>
+            <p>
+              Build models for tabular data, images, and text, with a focus on evaluation, interpretability, and deployment.
+            </p>
+            <div class="skill-tags">
+              <span>PyTorch</span><span>scikit-learn</span><span>XGBoost</span>
+              <span>NLP</span><span>CNNs</span><span>Evaluation</span>
+            </div>
+          </div>
+
+          <div class="skill-block">
+            <h3>Data &amp; MLOps</h3>
+            <p>
+              Work with datasets end-to-end: cleaning, feature engineering, experimentation, and lightweight deployment.
+            </p>
+            <div class="skill-tags">
+              <span>Pandas</span><span>NumPy</span><span>Streamlit</span>
+              <span>Shiny</span><span>AWS</span><span>Docker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- RESUME -->
     <section id="resume">
@@ -622,22 +741,22 @@
           <li>
             <div class="exp-role">Wayfair – Technical Analyst Intern</div>
             <div class="exp-body">
-              Developed robust APIs and SQL-based insights that reduced delivery
-              errors by 20% and improved ops efficiency by 30%.
+              Engineered APIs and SQL analyses that helped reduce label-printing errors by ~20%,
+              improving fulfillment operations and delivery accuracy.
             </div>
           </li>
           <li>
             <div class="exp-role">Leo1 – Full Stack Developer</div>
             <div class="exp-body">
-              Built Django backends, automated audit pipelines, and decrypted
-              financial statements for audit optimization.
+              Built Django backends and automated audit pipelines to decrypt and process
+              thousands of bank statements, cutting manual review time for the finance team.
             </div>
           </li>
           <li>
             <div class="exp-role">Dotsquares – ML Intern</div>
             <div class="exp-body">
-              Used YOLOv3 for face-mask detection and built ensemble models for
-              targeted marketing.
+              Developed YOLOv3-based face-mask detection and ensemble models for targeted marketing,
+              improving performance on test campaigns.
             </div>
           </li>
         </ul>
@@ -662,12 +781,11 @@
               </a>
             </div>
             <p class="project-desc">
-              Python + PyTorch + LSTM + Stable Diffusion to evaluate
-              text-to-image models, improving evaluation accuracy by
-              <strong>10%</strong> over baseline using generated captions and
-              similarity metrics.
+              Python + PyTorch + LSTM + Stable Diffusion to evaluate text-to-image models,
+              improving evaluation accuracy by <strong>10%</strong> over baseline using generated
+              captions and similarity metrics.
             </p>
-           <div class="project-links">
+            <div class="project-links">
               <a
                 class="btn-ghost"
                 href="https://github.com/Kartikay77/SnapScore-NLP"
@@ -676,7 +794,6 @@
               >
                 <span>🔗</span> GitHub
               </a>
-            
               <a
                 class="btn-ghost"
                 href="https://huggingface.co/spaces/Kartikay77/snapscore-app"
@@ -685,7 +802,6 @@
               >
                 <span>🚀</span> SnapScore Demo
               </a>
-
             </div>
 
             <div class="project-images">
@@ -707,6 +823,36 @@
                 class="project-img"
                 loading="lazy"
               />
+            </div>
+          </article>
+
+          <!-- RL -->
+          <article class="project-card">
+            <div class="project-tech">REINFORCEMENT LEARNING</div>
+            <div class="project-title">
+              <a
+                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                REINFORCE &amp; N-Step SARSA Experiments
+              </a>
+            </div>
+            <p class="project-desc">
+              Implemented REINFORCE with baseline and semi-gradient N-Step SARSA
+              on GridWorld, MountainCar, and CartPole, achieving about
+              <strong>20% better convergence</strong> via hyperparameter
+              tuning and learning-curve analysis.
+            </p>
+            <div class="project-links">
+              <a
+                class="btn-ghost"
+                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>🔗</span> GitHub
+              </a>
             </div>
           </article>
 
@@ -841,36 +987,6 @@
               </a>
             </div>
           </article>
-
-          <!-- RL -->
-          <article class="project-card">
-            <div class="project-tech">REINFORCEMENT LEARNING</div>
-            <div class="project-title">
-              <a
-                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                REINFORCE &amp; N-Step SARSA Experiments
-              </a>
-            </div>
-            <p class="project-desc">
-              Implemented REINFORCE with baseline and semi-gradient N-Step SARSA
-              on GridWorld, MountainCar, and CartPole, achieving about
-              <strong>20% better convergence</strong> via hyperparameter
-              tuning and learning-curve analysis.
-            </p>
-            <div class="project-links">
-              <a
-                class="btn-ghost"
-                href="https://github.com/Kartikay77/REINFORCE-with-Baseline-Semi-Gradient-N-Step-SARSA-on-different-environments"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>🔗</span> GitHub
-              </a>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -947,7 +1063,7 @@
     });
 
     // Highlight active nav link on scroll
-    const sections = ["about", "resume", "projects", "contact"];
+    const sections = ["about", "skills", "resume", "projects", "contact"];
     const navLinks = document.querySelectorAll(".nav-links a");
 
     function onScroll() {
